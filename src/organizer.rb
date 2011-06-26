@@ -16,7 +16,4 @@ class Organizer
 		end
 		FileUtils.cd ".."
 	end
-
-	def split_artist_and_song song
-	end
 end

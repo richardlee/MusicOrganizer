@@ -15,17 +15,15 @@ describe Organizer do
 	end
 
 	describe "standardize_song_names" do
-		before :each do
-			@song = File.basename(File.new("#{@dir_name}/ Some Artist - A Song .mp3", "w").path)
-		end
-		
 		it "should remove leading and trailing whitespace" do
+			@song = File.basename(File.new("#{@dir_name}/ Some Artist - A Song .mp3", "w").path)
 			Organizer.new.standardize_song_names(@dir_name)
 			FileUtils.cd @dir_name
 			Dir.glob("*.mp3").should == ["Some Artist - A Song.mp3"]
 		end
 
 		it "should capitalize artist name" do
+			@song = File.basename(File.new("#{@dir_name}/ some artist - A Song .mp3", "w").path)
 			Organizer.new.standardize_song_names(@dir_name)
 			FileUtils.cd @dir_name
 			Dir.glob("*.mp3").should == ["Some Artist - A Song.mp3"]

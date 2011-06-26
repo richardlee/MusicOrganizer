@@ -37,4 +37,11 @@ describe MusicFile do
 			song.formatted_filename.should == "Some Artist - A Song.mp3"
 		end
 	end
+
+	describe "formatted_artist" do
+		it "should capitalize each word in the artist name" do
+			song = MusicFile.new(File.basename(File.new("#{@dir_name}/ some artist - A Song .mp3", "w").path))
+			song.formatted_artist.should == "Some Artist"
+		end
+	end
 end
