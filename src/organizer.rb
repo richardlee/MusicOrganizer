@@ -1,15 +1,18 @@
 require "/home/richard/projects/music_organizer/src/music_file.rb"
+require 'fileutils'
+
 class Organizer
 	MISC = "misc"
 
 	def standardize_song_names dir_name
 		FileUtils.cd dir_name
-		FileUtils.mkdir MISC
+		FileUtils.mkdir MISC unless File.directory? MISC
 		songs = Dir.glob "*.mp3"
-		songs.collect do |song|
+		songs.each do |song|
 			begin
 				file = MusicFile.new(song)
-				FileUtils.mv song, file.formatted_filename
+				FileUtils.mkdir file.formatted_artist unless File.directory? file.formatted_artist
+				FileUtils.mv song, "#{file.formatted_artist}/#{file.formatted_filename}"
 			rescue NonstandardFormatError
 				FileUtils.mv song, "#{MISC}/#{song}"
 			end
