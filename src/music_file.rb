@@ -15,4 +15,8 @@ class MusicFile
 		extension = song_name.delete song_name.last
 		[artist.strip, song_name.join(" ").strip, extension]
 	end
+
+	def formatted_filename
+		"#{@artist} - #{@song_title}.#{@extension}"
+	end
 end

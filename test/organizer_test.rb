@@ -20,22 +20,25 @@ describe Organizer do
 		end
 		
 		it "should remove leading and trailing whitespace" do
-			Organizer.new.standardize_song_names(@dir_name, [@song])
+			Organizer.new.standardize_song_names(@dir_name)
 			FileUtils.cd @dir_name
-			Dir.glob("*").should == ["Some Artist - A Song.mp3"]
+			Dir.glob("*.mp3").should == ["Some Artist - A Song.mp3"]
 		end
 
 		it "should capitalize artist name" do
-			Organizer.new.standardize_song_names(@dir_name, [@song])
+			Organizer.new.standardize_song_names(@dir_name)
 			FileUtils.cd @dir_name
-			Dir.glob("*").should == ["Some Artist - A Song.mp3"]
+			Dir.glob("*.mp3").should == ["Some Artist - A Song.mp3"]
 		end
 
 		it "should separate songs with non-standard file names" do
-			Organizer.new.standardize_song_names(@dir_name, [@song])
+			song = File.basename(File.new("#{@dir_name}/Some Artist - A - Song.mp3", "w").path)
+
+			Organizer.new.standardize_song_names(@dir_name)
+			FileUtils.cd @dir_name
 			Dir.glob("*").should include(Organizer::MISC)
 			FileUtils.cd Organizer::MISC
-			Dir.glob.should include @song
+			Dir.glob("*").should include(song)
 		end
 	end
 end

@@ -30,4 +30,11 @@ describe MusicFile do
 			MusicFile.split_song_filename(song).should == ["Some Artist", "A Song with periods", "mp3"]
 		end
 	end
+
+	describe "formatted_filename" do
+		it "should return 'Artist - SongTitle.Extension'" do
+			song = MusicFile.new(File.basename(File.new("#{@dir_name}/Some Artist - A Song.mp3", "w").path))
+			song.formatted_filename.should == "Some Artist - A Song.mp3"
+		end
+	end
 end
