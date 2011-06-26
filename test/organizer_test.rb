@@ -22,8 +22,8 @@ describe Organizer do
 			Dir.glob("*.mp3").should == ["Some Artist - A Song.mp3"]
 		end
 
-		it "should capitalize artist name" do
-			@song = File.basename(File.new("#{@dir_name}/ some artist - A Song .mp3", "w").path)
+		it "should capitalize artist name and song title" do
+			@song = File.basename(File.new("#{@dir_name}/ some artist - a soNg .mp3", "w").path)
 			Organizer.new.standardize_song_names(@dir_name)
 			FileUtils.cd @dir_name
 			Dir.glob("*.mp3").should == ["Some Artist - A Song.mp3"]

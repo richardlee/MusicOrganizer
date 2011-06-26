@@ -17,10 +17,14 @@ class MusicFile
 	end
 
 	def formatted_filename
-		"#{formatted_artist} - #{@song_title}.#{@extension}"
+		"#{formatted_artist} - #{formatted_song_title}.#{@extension}"
 	end
 
 	def formatted_artist
 		artist.split(" ").each {|word| word.capitalize!}.join(" ")
+	end
+
+	def formatted_song_title
+		song_title.split(" ").each {|word| word.capitalize!}.join(" ")
 	end
 end
