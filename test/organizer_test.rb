@@ -1,10 +1,11 @@
-require "../src/organizer.rb"
+require "/home/richard/projects/music_organizer/src/organizer.rb"
 require "fileutils"
 TEST_ROOT = "/home/richard/projects/music_organizer/test"
 
 describe Organizer do
 	before :each do
 		@dir_name = "music"
+		FileUtils.cd TEST_ROOT
 		FileUtils.mkdir @dir_name
 	end
 
