@@ -1,4 +1,4 @@
-class Organize
+class Organizer
 	MISC = "misc"
 
 	def standardize_song_names dir_name, songs

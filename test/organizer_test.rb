@@ -1,8 +1,8 @@
-require "../src/organize.rb"
+require "../src/organizer.rb"
 require "fileutils"
 TEST_ROOT = "/home/richard/projects/music_organizer/test"
 
-describe Organize do
+describe Organizer do
 	before :each do
 		@dir_name = "music"
 		FileUtils.mkdir @dir_name
@@ -19,22 +19,21 @@ describe Organize do
 		end
 		
 		it "should remove leading and trailing whitespace" do
-			Organize.new.standardize_song_names(@dir_name, [@song])
+			Organizer.new.standardize_song_names(@dir_name, [@song])
 			FileUtils.cd @dir_name
 			Dir.glob("*").should == ["Some Artist - A Song.mp3"]
 		end
 
 		it "should capitalize artist name" do
-			Organize.new.standardize_song_names(@dir_name, [@song])
+			Organizer.new.standardize_song_names(@dir_name, [@song])
 			FileUtils.cd @dir_name
 			Dir.glob("*").should == ["Some Artist - A Song.mp3"]
 		end
 
 		it "should separate songs with non-standard file names" do
-			pending
-			Organize.new.standardize_song_names(@dir_name, [@song])
-			Dir.glob("*").should include(Organize::MISC)
-			FileUtils.cd Organize::MISC
+			Organizer.new.standardize_song_names(@dir_name, [@song])
+			Dir.glob("*").should include(Organizer::MISC)
+			FileUtils.cd Organizer::MISC
 			Dir.glob.should include @song
 		end
 	end
